@@ -17,11 +17,24 @@ pip install nlpengine
  - [ ] NER
  - [ ] Several NLP functions 
 
-### Text Classifier
+### 1. Text Classifier
 
- 1. A wrapper on top of Facebook's **[FastText](https://github.com/facebookresearch/fastText)** text classifier to build a text classifier with jus two lines of codes.
+  A wrapper on top of Facebook's **[FastText](https://github.com/facebookresearch/fastText)** text classifier to build a text classifier with jus two lines of codes.
 	 
-   ```python
-    from nlpengine.classifiers.fasttext_classifier import FastTextClassifier
-    clf = FastTextClassifier()
-    model = clf.fit(text, labels)
+    ```python
+  texts = ["sample sentence one", "just another sentence!", "is this a sentence?"]
+  labels = ["not question", "not question", "question"]
+
+  from nlpengine.classifiers import FastTextClassifier
+  clf = FastTextClassifier()
+  model = clf.fit(text, labels)
+  ```
+  
+### 2. Convert texts to vectors
+
+This module helps convert a corpus of texts to a vector matrix easily. This extracted matrix could be used for further downstream tasks such as text similiarity, vector decomposition & visualization, etc.
+
+  ```python
+  from nlpengine.feature_extraction import def get_glove_embeddings_from_sentences
+  texts = ["a great sentence", "and a meaningful one"]
+  vectors = get_glove_embeddings_from_sentences(texts, download_model=True)
