@@ -1,4 +1,4 @@
-from nlpengine.cli import main
+# from nlpengine.cli import main
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 import fasttext
@@ -11,12 +11,16 @@ class FastTextClassifier:
         self.model, self.X_train, self.X_test, self.y_train, self.y_test = None, None, None, None, None
 
     def split_test_data(self):
+        ''' Splits the data into test n train sets'''  
+
         self.labels = [str(item).strip().replace(" ", "_") for item in self.labels]
         self.texts = [str(x) for x in self.texts]
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.texts, self.labels)
 
 
     def preprocess_for_fasttext(self):
+        ''' preparing the texts and labels into the format fasttext needs '''
+
         X_train_fasttext, X_test_fasttext = [],[] 
         for i,j in zip(self.X_train, self.y_train):
             X_train_fasttext.append("__label__"+str(j) + " " + str(i))
@@ -41,11 +45,15 @@ class FastTextClassifier:
         
 
     def train(self):
+        ''' train the model and tune the hyper-paramters '''
+
         print("Fasttext Autotune Started for 10s.")
         self.model =  fasttext.train_supervised(input='__temp__train.txt', autotuneValidationFile='__temp__test.txt', autotuneDuration=10)
         print("Training complete.")
 
     def evaluate(self):
+        ''' model evaluation using fasttext's inbuilt functions''' 
+
         results = self.model.test("__temp__test.txt")
         print("Model Evaluation complete. Samples: {}, precision: {}, recall: {}".format(results[0], results[1], results[2]))
 
@@ -53,9 +61,12 @@ class FastTextClassifier:
         return self.model
     
     def get_num_of_classes(self):
+        ''' extracting the number of labels in the data '''
+
         return len(set(self.labels))
 
     def clean_temp_files(self):
+        ''' removing the temporary text files created for training '''
         try:
             os.remove("__temp__train.txt")
             os.remove("__temp__test.txt")
@@ -80,6 +91,7 @@ class FastTextClassifier:
         return self.get_model()
 
     def predict_proba(self, text):
+        ''' Return the probabilities of the predictions '''
         try:
             text = list(text)
             text = [str(x) for x in text]
@@ -89,6 +101,7 @@ class FastTextClassifier:
         return fasttext_predictions[1]
 
     def get_classification_report(self):
+        ''' printing sk-learn's classification report ''' 
         try:
             y_pred_ = self.model.predict(list(self.X_test))
             y_pred = [y_pred_[0][i][0].replace("__label__", "") for i in range(len(self.X_test))]
