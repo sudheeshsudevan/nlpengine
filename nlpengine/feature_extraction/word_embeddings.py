@@ -1,6 +1,6 @@
 import numpy as np
-
-
+import urllib
+import zipfile
 
 def get_glove_embeddings_from_sentences(texts, download_model=False):
     '''
@@ -17,10 +17,11 @@ def get_glove_embeddings_from_sentences(texts, download_model=False):
     #First download and unzip the glove pretrained file into directory.
     if download_model != False:
         try:
-            # !wget http://nlp.stanford.edu/data/glove.6B.zip
-            # !unzip glove*.zip
-            print("skipped model")
-
+            url = "http://nlp.stanford.edu/data/glove.6B.zip"
+            zip_path, _ = urllib.request.urlretrieve(url)
+            with zipfile.ZipFile(zip_path, "r") as f:
+                f.extractall()
+            
         except:
             print("downloading the model files failed. Please manually download and extract the file from: http://nlp.stanford.edu/data/glove.6B.zip")
 
@@ -44,4 +45,5 @@ def get_glove_embeddings_from_sentences(texts, download_model=False):
             text_vector = np.zeros((300,))
         sentence_vectors.append(text_vector)
     print("Extraction completed.")
+    
     return sentence_vectors
