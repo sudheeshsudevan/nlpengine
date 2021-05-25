@@ -7,8 +7,8 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
+# with open('HISTORY.rst') as history_file:
+#     history = history_file.read()
 
 requirements = ['Click>=7.0', ]
 
@@ -19,6 +19,7 @@ test_requirements = ['pytest>=3', ]
 setup(
     author="Sudheesh Sudevan",
     author_email='sudheesh_sudevan@live.com',
+    long_description_content_type="text/markdown",
     python_requires='>=3.6',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
@@ -38,7 +39,7 @@ setup(
     },
     # install_requires=requirements,
     license="MIT license",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     include_package_data=True,
     keywords= ['nlpengine', 'nlp', 'machine learning', 'natural language processing'],
     name='nlpengine',
