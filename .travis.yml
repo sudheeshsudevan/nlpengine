@@ -24,5 +24,5 @@ deploy:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: sudheesh_sudevan/nlpengine
+    repo: sudheeshsudevan/nlpengine
     python: 3.8
