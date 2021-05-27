@@ -1,3 +1,5 @@
+![PyPI - License](https://img.shields.io/pypi/l/nlpengine?color=y&logo=y)    ![PyPI Status](https://img.shields.io/pypi/v/nlpengine)  ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/nlpengine)  ![PyPI - Wheel](https://img.shields.io/pypi/wheel/nlpengine) ![PyPI - Implementation](https://img.shields.io/pypi/implementation/nlpengine)
+
 # NLP Engine
 
 **nlpengine** is a collection of Natural Language Processing functions. Its designed to make a NLP engineer's life easier by bundling some of the everyday tasks like data cleaning, feature extraction, text classification, etc. This module is built on top of other popular open source python libraries.
@@ -16,20 +18,20 @@ pip install nlpengine
  - [ ] Easy to use text classifiers
  - [ ] Vectorization of texts
  - [ ] Active Learning (in development)
- - [ ] Several utility functions
+ - [ ]  Several utility functions
 
 ### Text Classifier
 
  A wrapper on top of Facebook's **[FastText](https://github.com/facebookresearch/fastText)** text classifier to build a text classifier with just few lines of codes.
 	 
    ```python
-texts = ["sample sentence one", "just another sentence!", "is this a sentence?"]
-labels = ["not question", "not question", "question"]
+  texts = ["sample sentence one", "just another sentence!", "is this a sentence?"]
+  labels = ["not question", "not question", "question"]
 
-from nlpengine.classifiers import FastTextClassifier
-clf = FastTextClassifier()
-model = clf.fit(text, labels)
-```
+  from nlpengine.classifiers import FastTextClassifier
+  clf = FastTextClassifier()
+  model = clf.fit(text, labels)
+  ```
 
    
 
@@ -41,3 +43,4 @@ This module helps convert a corpus of texts to a vector matrix easily. This extr
 from nlpengine.feature_extraction import def get_glove_embeddings_from_sentences
 texts = ["a great sentence", "and a meaningful one"]
 vectors = get_glove_embeddings_from_sentences(texts, download_model=True)
+```
