@@ -30,7 +30,7 @@ pip install nlpengine
 
   from nlpengine.classifiers import FastTextClassifier
   clf = FastTextClassifier()
-  model = clf.fit(text, labels)
+  model = clf.fit(texts, labels)
   ```
 
    
@@ -40,7 +40,7 @@ pip install nlpengine
 This module helps convert a corpus of texts to a vector matrix easily. This extracted matrix could be used for further downstream tasks such as text similiarity, vector decomposition & visualization, etc.
 
 ```python
-from nlpengine.feature_extraction import def get_glove_embeddings_from_sentences
+from nlpengine.feature_extraction import get_glove_embeddings_from_sentences
 texts = ["a great sentence", "and a meaningful one"]
 vectors = get_glove_embeddings_from_sentences(texts, download_model=True)
 ```
